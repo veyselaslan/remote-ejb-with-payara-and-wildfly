@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Distributed Enterprise Applications</title>
+	<style type="text/css">
+.ui-row-editor .ui-row-editor-pencil {
+	margin-left: 8px;
+}
+
+.value {
+	font-weight: bold;
+}
+
+form {
+	margin: 0 auto;
+	font-size: 14px;
+	max-width: 1024px;
+}
+</style>
+	<script type="text/javascript">    
+    PrimeFaces.locales['de'] = {
+        closeText: 'Schließen',
+        prevText: 'Zurück',
+        nextText: 'Weiter',
+        monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+        monthNamesShort: ['Jan', 'Feb', 'März', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+        dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+        dayNamesShort: ['Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam'],
+        dayNamesMin: ['S', 'M', 'D', 'M ', 'D', 'F ', 'S'],
+        weekHeader: 'Woche',
+        FirstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: '',
+        timeOnlyTitle: 'Nur Zeit',
+        timeText: 'Zeit',
+        hourText: 'Stunde',
+        minuteText: 'Minute',
+        secondText: 'Sekunde',
+        currentText: 'Aktuelles Datum',
+        ampm: false,
+        month: 'Monat',
+        week: 'Woche',
+        day: 'Tag',
+        allDayText: 'Ganzer Tag'
+    };
+</script>
+
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:tabMenu activeIndex="#{param.i}">
+			<p:menuitem value="Home" outcome="home" icon="pi pi-star">
+				<f:param name="i" value="0" />
+			</p:menuitem>
+			<p:menuitem value="Monitor" outcome="monitor" icon="pi pi-search">
+				<f:param name="i" value="1" />
+			</p:menuitem>
+		</p:tabMenu>
+		<div>
+			<p:commandButton value="Send JMS Message" type="button"
+				onclick="PF('dlg').show();" />
+
+
+			<p:dialog header="Send JMS Message To Queue" widgetVar="dlg"
+				modal="true" height="100">
+
+				<h:outputLabel for="jmsMessage" value="Message:" />
+				<p:inputText id="jmsMessage" value="#{homeBean.jmsMessage}"
+					required="true" label="message" />
+
+
+				<p:commandButton value="Send" update=":form:msgs"
+					action="#{homeBean.sendJMSMessage()}" />
+
+			</p:dialog>
+
+		</div>
+		<br />
+	</h:form>
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+		<p:dataTable id="dtBook" var="book" value="#{homeBean.bookList}"
+			widgetVar="dtBook" editable="true" style="margin-bottom:20px">
+
+			<p:ajax event="rowEdit" listener="#{homeBean.onRowEdit}"
+				update=":form:msgs" />
+			<p:ajax event="rowEditCancel" listener="#{homeBean.onRowCancel}"
+				update=":form:msgs" />
+
+
+
+			<f:facet name="header">
+        		List of Books
+    		</f:facet>
+			<p:column headerText="ID" style="width:25px;">
+				<h:outputText value="#{book.id}" />
+			</p:column>
+			<p:column headerText="Title">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{book.title}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{book.title}" style="width:100%"
+							label="Title" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Price" style="width:55px;">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{book.unitCost}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{book.unitCost}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Category">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{book.category}" />
+					</f:facet>
+					<f:facet name="input">
+						<h:selectOneMenu value="#{book.category}" style="width:100%">
+							<f:selectItem itemValue="SCIENCE" itemLabel="Science" />
+							<f:selectItem itemValue="BIOLOGY" itemLabel="Biology" />
+							<f:selectItem itemValue="PROGRAMMING" itemLabel="Programming" />
+							<f:selectItem itemValue="COMICS" itemLabel="Comics" />
+						</h:selectOneMenu>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Publication Date">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{book.publicationDate}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:outputLabel for="popup" />
+						<p:calendar id="popup" value="#{book.publicationDate}" />
+					</f:facet>
+
+
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Description">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{book.description}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{book.description}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column headerText="Action" style="width:90px;">
+				<p:commandButton value="Delete"
+					action="#{homeBean.deleteBook(book.id)}" update=":form:msgs dtBook"></p:commandButton>
+			</p:column>
+			<p:column style="width:35px" headerText="Edit">
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>
+
+
+		<div>
+			<div>
+				<p:commandButton value="Add new book"
+					styleClass="ui-priority-primary" process="@this"
+					update=":form:msgs" action="#{homeBean.onAddNew()}"
+					oncomplete="PF('dtBook').addRow();" />
+
+			</div>
+		</div>
+	</h:form>
+</h:body>
+
+</html>
