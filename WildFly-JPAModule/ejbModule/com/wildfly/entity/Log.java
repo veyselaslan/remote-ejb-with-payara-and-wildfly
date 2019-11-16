@@ -17,7 +17,7 @@ import org.hibernate.annotations.Nationalized;
 
 @Entity
 @Table(name = "T_LOG")
-public class Log implements Serializable, Comparable<Log>  {
+public class Log implements Serializable, Comparable<Log> {
 
 	private static final long serialVersionUID = -1364544137247557945L;
 
@@ -37,7 +37,6 @@ public class Log implements Serializable, Comparable<Log>  {
 	@Column(name = "LOG")
 	private String log;
 
-	
 	public Long getId() {
 		return id;
 	}
@@ -102,14 +101,12 @@ public class Log implements Serializable, Comparable<Log>  {
 
 	@Override
 	public int compareTo(Log o) {
-		if(this.id == o.getId())
+		if (this.id == o.getId())
 			return 0;
-		else if(this.id > o.getId())
+		else if (this.id > o.getId())
 			return 1;
 		else
 			return -1;
 	}
-	
-	
 
 }

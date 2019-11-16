@@ -40,7 +40,22 @@ public class HomeBean implements Serializable {
 		if (bookService != null) {
 			bookList = bookService.getAllBooks();
 			Collections.sort(bookList);
+			FacesMessage msg = new FacesMessage("SUCCESS: " , "BookServiceBean has been loaded from WildFly.");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
+		else {
+			FacesMessage msg = new FacesMessage("WARNING: " , "BookServiceBean could not be loaded from WildFly");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
+		if(logService != null) {
+			FacesMessage msg = new FacesMessage("SUCCESS: " , "LogServiceBean has been loaded successfully from WildFly.");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
+		else {
+			FacesMessage msg = new FacesMessage("WARNING: " , "LogServiceBean could not be loaded from WildFly");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
+		
 	}
 
 	public BookService getBookService() {
