@@ -6,10 +6,7 @@
 	<persistence-unit name="WildFly-Module"
 		transaction-type="JTA">
 		<jta-data-source>java:/jboss/datasources/JPA_DATASOURCE</jta-data-source>
-		<!-- <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-<!-- 		<class>com.wildfly.entity.Book</class> -->
-<!-- 		<class>com.wildfly.entity.Log</class> -->
 		<properties>
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.Oracle10gDialect" />
