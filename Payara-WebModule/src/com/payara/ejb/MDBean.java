@@ -14,7 +14,6 @@ import javax.jms.TextMessage;
 
 import com.payara.util.ServiceUtil;
 import com.wildfly.service.LogService;
-@RunAs("MDBean")
 @JMSDestinationDefinition(name = "queue/PayaraMessageQueue", interfaceName = "javax.jms.Queue", destinationName = "PayaraMessageQueue")
 @MessageDriven(activationConfig = {
 		@ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "queue/PayaraMessageQueue"),
