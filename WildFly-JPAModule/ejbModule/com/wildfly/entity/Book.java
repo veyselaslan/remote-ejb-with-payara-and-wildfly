@@ -25,7 +25,11 @@ public class Book implements Serializable, Comparable<Book> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "B_SEQ")
+
+	@SequenceGenerator(sequenceName = "T_BOOK_SEQUENCE", allocationSize = 1, initialValue = 11, name = "B_SEQ")
+=======
     	@SequenceGenerator(sequenceName = "T_BOOK_SEQUENCE", allocationSize = 1, initialValue = 1, name = "B_SEQ")
+
 	@Column(name = "ID")
 	private Long id;
 	@Nationalized
@@ -101,8 +105,6 @@ public class Book implements Serializable, Comparable<Book> {
 		this.publicationDate = publicationDate;
 	}
 
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -136,15 +138,13 @@ public class Book implements Serializable, Comparable<Book> {
 
 	@Override
 	public int compareTo(Book o) {
-		if(this.id == o.getId())
+		if (this.id == o.getId())
 			return 0;
-		else if(this.id > o.getId())
+		else if (this.id > o.getId())
 			return 1;
 		else
 			return -1;
-		
+
 	}
-
-
 
 }

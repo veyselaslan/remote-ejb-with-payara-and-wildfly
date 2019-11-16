@@ -13,6 +13,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="D:/WildFly-JPAModule.jar"/>
+	<classpathentry kind="lib" path="D:/github-repository/remote-ejb-with-payara-and-wildfly/Payara-WebModule/WebContent/META-INF/WildFly-JPAModule.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

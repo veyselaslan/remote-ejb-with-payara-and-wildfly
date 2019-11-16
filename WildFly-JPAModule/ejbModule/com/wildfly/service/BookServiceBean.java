@@ -3,8 +3,6 @@ package com.wildfly.service;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -12,7 +10,6 @@ import javax.persistence.TypedQuery;
 import com.wildfly.entity.Book;
 
 @Stateless
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class BookServiceBean implements BookService {
 
 	@PersistenceContext
@@ -51,7 +48,7 @@ public class BookServiceBean implements BookService {
 	public void deleteBook(Long id) {
 		try {
 			Book temp = em.getReference(Book.class, id);
-			if (temp != null)
+			if (temp != null) 
 				em.remove(em.getReference(Book.class, id));
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import com.payara.util.ServiceUtil;
@@ -17,17 +19,24 @@ import com.wildfly.service.LogService;
 public class MonitorBean implements Serializable {
 
 	private static final long serialVersionUID = 6787664332946823939L;
-	
+
 	private LogService logService;
 	private List<Log> logs;
-	private int logCount;
 
 	@PostConstruct
 	public void init() {
 		logService = ServiceUtil.getRemoteBean(LogService.class);
-		logs = logService.getLogs();
-		logCount = logs.size();
-		Collections.sort(logs, Collections.reverseOrder());
+		if(logService != null) {
+			logs = logService.getLogs();
+			Collections.sort(logs, Collections.reverseOrder());
+			FacesMessage msg = new FacesMessage("SUCCESS: LogServiceBean has been loaded from WildFly");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
+		else {
+			FacesMessage msg = new FacesMessage("WARNING: LogServiceBean could not be loaded from WildFly");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
+		
 	}
 
 	public LogService getLogClientService() {
@@ -46,17 +55,8 @@ public class MonitorBean implements Serializable {
 		this.logs = logs;
 	}
 
-	public int getLogCount() {
-		return logCount;
-	}
-
-	public void setLogCount(int logCount) {
-		this.logCount = logCount;
-	}
-
 	public void refreshLogs() {
 		logs = logService.getLogs();
-		logCount = logs.size();
 		Collections.sort(logs, Collections.reverseOrder());
 	}
 
