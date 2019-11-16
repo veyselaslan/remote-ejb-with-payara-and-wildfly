@@ -25,7 +25,11 @@ public class Book implements Serializable, Comparable<Book> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "B_SEQ")
+
 	@SequenceGenerator(sequenceName = "T_BOOK_SEQUENCE", allocationSize = 1, initialValue = 11, name = "B_SEQ")
+=======
+    	@SequenceGenerator(sequenceName = "T_BOOK_SEQUENCE", allocationSize = 1, initialValue = 1, name = "B_SEQ")
+
 	@Column(name = "ID")
 	private Long id;
 	@Nationalized
