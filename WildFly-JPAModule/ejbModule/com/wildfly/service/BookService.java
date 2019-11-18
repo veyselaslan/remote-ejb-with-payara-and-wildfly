@@ -11,12 +11,11 @@ public interface BookService {
 
 	List<Book> getAllBooks();
 
-	void addBook(Book Book);
+	Book addBook(Book Book);
 
-	Book updateBook(Book Book);
+	void updateBook(Book Book);
 
 	void deleteBook(Long uuid);
 
-	Book createBookObject();
 
 }
