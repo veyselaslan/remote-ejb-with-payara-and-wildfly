@@ -29,26 +29,21 @@ public class BookServiceBean implements BookService {
 	}
 
 	@Override
-	public void addBook(Book book) {
+	public Book addBook(Book book) {
 		try {
 			em.persist(book);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		return book;
 	}
 
-	@Override
-	public Book createBookObject() {
-		Book newBook = new Book();
-		addBook(newBook);
-		return newBook;
-	}
+
 	@Override
 	public void deleteBook(Long id) {
 		try {
 			Book temp = em.getReference(Book.class, id);
-			if (temp != null) 
+			if (temp != null)
 				em.remove(em.getReference(Book.class, id));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,18 +52,12 @@ public class BookServiceBean implements BookService {
 	}
 
 	@Override
-	public Book updateBook(Book book) {
-		Book b = null;
+	public void updateBook(Book book) {
 		try {
-			b = em.merge(book);
-			return b;
+			em.merge(book);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return b;
 	}
-
-
-
 
 }

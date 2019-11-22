@@ -100,7 +100,9 @@ public class HomeBean implements Serializable {
 	}
 
 	public void onAddNew() {
-		Book newBook = bookService.createBookObject();
+//		Book newBook = bookService.createBookObject();
+		Book newBook = new Book();
+		newBook = bookService.addBook(newBook);
 		bookList.add(newBook);
 		logService.createLog(new Date(), "JSFPage", "Book has been added, ID: " + newBook.getId());
 		FacesMessage msg = new FacesMessage("New book added", "ID: " + newBook.getId());
