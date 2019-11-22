@@ -17,10 +17,9 @@ public class BookServiceBean implements BookService {
 
 	@Override
 	public List<Book> getAllBooks() {
-		TypedQuery<Book> bookList = null;
 		List<Book> result = null;
 		try {
-			bookList = em.createQuery("Select p from Book p", Book.class);
+			TypedQuery<Book> bookList = em.createQuery("Select p from Book p", Book.class);
 			result = bookList.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();

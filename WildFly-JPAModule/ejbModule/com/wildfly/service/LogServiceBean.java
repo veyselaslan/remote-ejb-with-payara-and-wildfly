@@ -31,10 +31,9 @@ public class LogServiceBean implements LogService {
 
 	@Override
 	public List<Log> getLogs() {
-		TypedQuery<Log> logs = null;
 		List<Log> result = null;
 		try {
-			logs = em.createQuery("Select l from Log l", Log.class);
+			TypedQuery<Log> logs = em.createQuery("Select l from Log l", Log.class);
 			result = logs.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();

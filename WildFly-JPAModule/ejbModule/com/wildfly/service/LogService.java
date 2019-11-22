@@ -9,9 +9,8 @@ import com.wildfly.entity.Log;
 
 @Remote
 public interface LogService {
-	
+
 	void createLog(Date processTime, String source, String log);
-	
 	List<Log> getLogs();
 
 }
