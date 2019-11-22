@@ -10,12 +10,8 @@ import com.wildfly.entity.Book;
 public interface BookService {
 
 	List<Book> getAllBooks();
-
 	Book addBook(Book Book);
-
 	void updateBook(Book Book);
-
 	void deleteBook(Long uuid);
-
-
+	
 }

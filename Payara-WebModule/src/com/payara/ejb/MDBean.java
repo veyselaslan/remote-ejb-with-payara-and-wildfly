@@ -36,8 +36,6 @@ public class MDBean implements MessageListener  {
 		}catch(JMSException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 
 }

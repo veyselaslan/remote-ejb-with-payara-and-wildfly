@@ -100,7 +100,6 @@ public class HomeBean implements Serializable {
 	}
 
 	public void onAddNew() {
-//		Book newBook = bookService.createBookObject();
 		Book newBook = new Book();
 		newBook = bookService.addBook(newBook);
 		bookList.add(newBook);
@@ -127,7 +126,6 @@ public class HomeBean implements Serializable {
 			message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Fail", "Message cannot be null.");
 		}
 		FacesContext.getCurrentInstance().addMessage(null, message);
-
 	}
 
 }
