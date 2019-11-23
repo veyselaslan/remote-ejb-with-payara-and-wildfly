@@ -26,7 +26,6 @@ public class Log implements Serializable, Comparable<Log> {
 	@SequenceGenerator(sequenceName = "T_LOG_SEQUENCE", allocationSize = 1, initialValue = 1, name = "L_SEQ")
 	@Column(name = "ID")
 	private Long id;
-
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "PROCESS_TIME")
 	private Date processTime;
