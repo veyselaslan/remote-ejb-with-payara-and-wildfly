@@ -43,7 +43,7 @@ public class BookServiceBean implements BookService {
 		try {
 			Book temp = em.getReference(Book.class, id);
 			if (temp != null)
-				em.remove(em.getReference(Book.class, id));
+				em.remove(temp);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
